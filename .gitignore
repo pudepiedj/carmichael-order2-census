@@ -1,0 +1,14 @@
+# compiled engines
+cn2x/cn2x
+cn2x/cn2xc
+cn2x/cn2xh
+cn2x/cn2tail
+tests/bin/
+# new run directories (the published census is under results/)
+cn2x/runs/
+# decompressed copy of the published candidates
+results/howe_1e25/capped/out.txt
+results/howe_1e25/capped/done.log
+__pycache__/
+*.pyc
+.DS_Store

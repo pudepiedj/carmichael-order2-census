@@ -1,0 +1,2 @@
+sympy>=1.9
+numpy  # only for cn2_exhaustive.py, the Python reference engine
