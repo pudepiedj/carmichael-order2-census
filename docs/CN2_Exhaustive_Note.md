@@ -124,7 +124,7 @@ The eight in $[10^{22}, 10^{25})$, all in decade 24:
 
 $$n = 2088144166339753513992001 = 113 \cdot 199 \cdot 239 \cdot 263 \cdot 701 \cdot 7919 \cdot 15391 \cdot 17291$$
 
-Verified from scratch: squarefree, composite, $p^2-1 \mid n-1$ for all eight primes. Absent from `cn2_master.json` (235,108 values) and from the entire repository before 18 September 2026.
+Verified from scratch: squarefree, composite, $p^2-1 \mid n-1$ for all eight primes. It was not in any earlier record of this work, and was first found on 18 September 2026.
 
 **Why every previous campaign missed it.** Its canonical modulus is
 $$L(n) = 21731935068043200 = 2^6 \cdot 3^4 \cdot 5^2 \cdot 7 \cdot 11 \cdot 13 \cdot 17 \cdot 19 \cdot 37 \cdot 107 \cdot 131 = 2^{54.27},$$
@@ -132,7 +132,6 @@ carrying **three distinct rogue primes (37, 107, 131)**. The lazy sweep's DFS ho
 
 **Its statistics are unremarkable, which is the point.** Pool 51, $\log_2\varphi(L) = 51.659$, fecundity $-0.659$, so a predicted count of 0.63 against 3 actually present for that modulus — an ordinary Poisson arrival in the deep tail (cf. `CN2_Index_Note.md` §4). Index 1, no barred primes, 2-slack $2^{26.5}$. $k = 8$ ties the minimum among all 14 known, and its geometric mean 1096 sits inside the known range 68–1193. What *is* a record is the largest prime factor, 17,291, beating the previous 15,809.
 
-**Its generator is fertile.** The canonical $L$ yields 3 CN2s (this one and two giants at $10^{62.35}$ and $10^{79.86}$); the $5^3$ inflation $L' = 108659675340216000$ yields 6, in 3.5 s with the SS engine against 87.3 s for the old two-list engine. **None of the nine is in the corpus.**
 
 ## 6. Costs
 
@@ -179,7 +178,7 @@ python cn2x_campaign.py verify --dir cn2x/runs/campaign_1e24
 
 1. ~~**Sweep the three-rogue family.**~~ **Withdrawn — it was done in July.** This item originally claimed that three-rogue generators "are exactly what no campaign has enumerated". That is false: `CN2_Desert_Census.md` records a triple-rogue mini-sweep of 11 July 2026 over 48,053 targets (`harvest_targets_3rogue.json`), which found **zero in 108 s**, the modal outcome at P(0) ≈ 99.6%. The census had also checked the rogue axis to five rogues. What is true is narrower: the *lazy sweep's* two-slot frame could not see 2088144166339753513992001, which is why that number survived to be found here.
 
-   A fecundity measurement of 20 September agrees with the July verdict and explains it: fecundity falls by about 7 per additional rogue, because a rogue inflates φ(L) while adding no pool primes (a fresh large prime in L makes p²−1 | L harder, not easier). Sampling random decade-24 prime products gives generators with a median of 103 bits and 8.3 rogues — utterly sterile — against ≤ 3 rogues and ≤ 54.3 bits for all fifteen known CN2s. Three rogues is the edge of viability, not an unexplored frontier: the 2088 generator scores −0.659 and produced a family of three.
+   A fecundity measurement of 20 September agrees with the July verdict and explains it: fecundity falls by about 7 per additional rogue, because a rogue inflates φ(L) while adding no pool primes (a fresh large prime in L makes p²−1 | L harder, not easier). Sampling random decade-24 prime products gives generators with a median of 103 bits and 8.3 rogues — utterly sterile — against ≤ 3 rogues and ≤ 54.3 bits for all fourteen CN2s below $10^{25}$ (a complete list, §9). Three rogues is the edge of viability, not an unexplored frontier: the 2088 generator scores −0.659 and produced a family of three.
 2. ~~**$10^{25}$ unconditional**~~ **Done 24 September, in 15.1 h under Howe's definition (§9).** The original item read: **$10^{25}$ unconditional** — about 132 h, or 13 nights of 10 hours, and roughly 7 with a working GPU Fermat kernel. It would turn the list of eight in decade 24 into a theorem, and settle whether 2088144166339753513992001 has neighbours that every capped run has been blind to. This is the one remaining computation that changes what is *known* rather than what is *believed*.
 3. **Re-tune the LIST switch ratio** for the compiled engine — it was tuned in Python, where the cost balance differs. With 99.9997% of nodes going to LIST at $10^{24}$, the switch is firing almost everywhere, and the threshold has never been tested against the C engine's actual costs.
 4. **Cosmetic, next engine build:** print the cumulative shard total with the session's count in brackets, and label `hits` as "path hits" (§7). Both misled a reader of the live log during this census.
