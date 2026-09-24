@@ -26,7 +26,7 @@ The terms (also in `results/b175531.txt`):
 | 13 | 7865064643837556041286401 | 24.90 | 11 | 15809 |
 | 14 | 9400084864021826054720641 | 24.97 | 11 | 4523 |
 
-**Factorisations.** Each term is the product of the primes listed, and $p^2-1$ divides $n-1$ is the second-order Korselt criterion on square-free $n$. `results/factorisations.txt` has the same data in machine-readable form, together with each term's modulus $L = \operatorname{lcm}_{p \mid n}(p^2-1)$ (which divides $n-1$), factored.
+**Factorisations.** Each term is the product of the primes listed, and $p^2-1$ divides $n-1$ for every prime $p \mid n$ is the second-order Korselt criterion on square-free $n$. `results/factorisations.txt` (readable) and `results/factorisations.json` (machine-readable) give the same data together with each term's modulus $L = \mathrm{lcm}_{p \mid n}(p^2-1)$ (which divides $n-1$), factored.
 
 ```
 a(1)   = 443372888629441            = 17 · 31 · 41 · 43 · 89 · 97 · 167 · 331
@@ -110,7 +110,7 @@ tests/run_validation.sh --full   # adds the heavier checks (about 45 minutes mor
 |---|---|
 | `parity` | in rigid mode, `cn2xh` is identical to the original engine `cn2xc`: all nine counters and every output record |
 | `cheb` | the same engine, with modulus $(p^2-1)/2$, finds exactly the terms of OEIS A299799 below $10^{18}$, one of them not a rigid CN2 |
-| `relaxed` | with modulus $(p^2-1)/D$ for $D = 24, 12, 8, 6$ and the Fermat filter off, the two phases together find every solution that brute-force factorisation of all $n < N$ finds, including solutions with a prime of residue type $p$, some reachable only through the tail's type-$p$ family. This is the test of the non-rigid code path: no list of true order-2 numbers small enough to brute-force contains a type-$p$ prime |
+| `relaxed` | with modulus $(p^2-1)/D$ for $D = 24, 12, 8, 6$ and the Fermat filter off, the two phases together find every solution that brute-force factorisation of all $n < N$ finds, including solutions with a prime of residue type $p$, some reachable only through the tail's family for primes of type $p$. This is the test of the non-rigid code path: no list of true order-2 numbers small enough to brute-force contains a prime of type $p$ |
 | `howe20` | the whole pipeline at $X = 10^{20}$: the five known terms, none non-rigid |
 | `resume` | both engines, stopped and resumed mid-run, reproduce an uninterrupted run exactly |
 | `published` | re-verifies the published candidates: 14 terms, none non-rigid |
@@ -127,7 +127,7 @@ tests/run_validation.sh --full   # adds the heavier checks (about 45 minutes mor
 | `cn2x/cn2xh.c`, `cn2x/cn2tail.c` | the two census engines |
 | `cn2x/cn2xc.c`, `cn2x/cn2x.c`, `cn2_exhaustive.py`, `cn2_exhaustive_c.py`, `cn2x_campaign.py`, `cn2x_python_reference.json`, `cn2x/test_checkpoint.py`, `cn2x/verify_run.py` | the original rigid-only engines, their Python reference implementation and tests (`docs/` §1–§8). `cn2xc` is the parity reference for `cn2xh` |
 | `tests/` | the validation suite and the brute-force reference `bf_order2.c` |
-| `results/` | `b175531.txt`, `factorisations.txt`, and the census run record `howe_1e25/` |
+| `results/` | `b175531.txt`, `factorisations.txt` and `.json`, and the census run record `howe_1e25/` |
 | `docs/CN2_Exhaustive_Note.md` | the method, validation and results. It mentions other documents of the wider research programme that are not part of this repository |
 
 ## References
